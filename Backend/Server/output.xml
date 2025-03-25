@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.94SVN scan initiated Mon Mar 24 22:08:44 2025 as: nmap -sP -oX output.xml 192.168.1.0/24 -->
+<nmaprun scanner="nmap" args="nmap -sP -oX output.xml 192.168.1.0/24" start="1742872124" startstr="Mon Mar 24 22:08:44 2025" version="7.94SVN" xmloutputversion="1.05">
+<verbose level="0"/>
+<debugging level="0"/>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="192.168.1.1" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="4172" rttvar="3776" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="192.168.1.39" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="1881" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1742872156" timestr="Mon Mar 24 22:09:16 2025" summary="Nmap done at Mon Mar 24 22:09:16 2025; 256 IP addresses (2 hosts up) scanned in 32.03 seconds" elapsed="32.03" exit="success"/><hosts up="2" down="254" total="256"/>
+</runstats>
+</nmaprun>

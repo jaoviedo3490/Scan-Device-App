@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS de Bootstrap 4 -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- JS de Bootstrap 4 (para componentes interactivos como modales, dropdowns, etc.) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/Css/index.css">
+
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+    <title>Node-NMAP</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="#" id="nmap" class="btn btn-primary">Escanear dispositivos</a>
+        <div id="loader" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Cargando datos...</p>
+        </div>
+    </div>
+    <!-- jQuery desde el CDN de Google -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- jQuery desde el CDN de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <div id="response" class="container">
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#loader").hide();
+            $("#nmap").click(function () {
+                $("#loader").show();
+                $.get("http://localhost:3000/scan", function (data) {
+                    $("#loader").hide();
+                    console.log("Respuesta del servidor:", data);
+
+                    const host = data.nmaprun.host;
+                    let html = `
+                        <div class="row">
+                            <div class="col">
+                                <p>Dispositivos Conectados: ${Array.isArray(host) ? host.length : 1}</p>
+                            </div>
+                        </div>
+                        <div class="row">`;
+
+                    if (Array.isArray(host)) {
+                        host.forEach(element => {
+                           
+                            html += `
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header">${element.address.$.addr} - ${element.address.$.addrtype}</div>
+                                        <div class="card-body">
+                                            <h4 class="card-title">Título de la tarjeta</h4>
+                                            <p class="card-text">Descripción del dispositivo escaneado.</p>
+                                        </div>
+                                    </div>
+                                </div>`;
+                        });
+                    } else {
+                        html += `
+                            <div class="col-md-4 col-sm-6">
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-header">${host.address.$.addr} - ${host.address.$.addrtype}</div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">Título de la tarjeta</h4>
+                                        <p class="card-text">Descripción del único dispositivo encontrado.</p>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }
+
+                    html += `</div>`; // Cierra el <div class="row">
+                    $("#response").html(html);
+
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $("#loader").hide();
+                    console.error("Error en la petición:", textStatus, errorThrown, jqXHR.responseText);
+                    alert("Error al realizar la petición. Revisa la consola para más detalles.");
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
