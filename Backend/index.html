@@ -54,15 +54,16 @@
                         </div>
                         <div class="row">`;
 
+                    let ip_devices = [];
                     if (Array.isArray(host)) {
                         host.forEach(element => {
-                           
+                           ip_devices.push(element.address.$.addr);
                             html += `
                                 <div class="col-md-4 col-sm-6">
                                     <div class="card border-primary mb-3" style="max-width: 20rem;">
                                         <div class="card-header">${element.address.$.addr} - ${element.address.$.addrtype}</div>
                                         <div class="card-body">
-                                            <h4 class="card-title">Título de la tarjeta</h4>
+                                            <h4 class="card-title">Sistema Operativo ${element.address.$.OS}</h4>
                                             <p class="card-text">Descripción del dispositivo escaneado.</p>
                                         </div>
                                     </div>

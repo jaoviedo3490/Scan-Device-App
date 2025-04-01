@@ -1,27 +1,27 @@
 const Services = require('../GenericServices/Services.cjs');
 
 
-class Nmap extends Services{
+class Nmap extends Services {
     static #instance = null;
-    constructor(){
+    constructor() {
         super();
         console.log("nmap");
     }
 
-    static getInstance(){
-        if(!this.#instance){
+    static getInstance() {
+        if (!this.#instance) {
             this.#instance = new Nmap();
         }
         return this.#instance;
     }
-    async getDeviceConnected(param){
+    async getDeviceConnected(param) {
         console.log("getDeviceConnected");
-        try{
-            await super.executeCommand(`wsl nmap -sP ${param} -oX output.xml`);
+        try {
+            await super.executeCommand(`wsl nmap -sP ${param} -oX output.xml > nul 2>&1`);
             super.writerLog(`Escaneo nmap realizado - ip : ${param}`);
             return await super.XmltoJson("output.xml");
-        }catch(error){
-            return {status:500,message:error};
+        } catch (error) {
+            return { status: 500, message: error };
         }
     }
     /*async getPortsDevice(param){
@@ -32,19 +32,26 @@ class Nmap extends Services{
             return {status:500,message:error};
         }
     }*/
-    async getSystemInfo(param){
-        try{
-            await super.executeCommand(`wsl truncate -s 0 resultado.txt`);
-            await super.executeCommand(`wsl nmap -p- -A -T4 -oN resultado.txt ${param}`);
-            console.log("aqui??????");
-            let datos =  super.ReadTXT("resultado.txt","Linux");
-            datos = (datos.status == 404) ? "Desconocido" : datos.os;
-            //let os = await super.XmltoJson("output.txt");
+    async getSystemInfo(param) {
+        let file_output = "" ;
+        try {
+            super.executeCommand(`wsl truncate -s 0 resultado.txt`);
+            super.executeCommand(`wsl nmap -p- -A -T4 -oN resultado.txt ${param} > nul 2>&1`);
+            let os = "";
             
-            console.log("Sistema operatico: "+datos);
-            return os;
-        }catch(error){
-            return {status:500,message:error};
+            file_output = super.ReadTXT(`resultado.txt`, "Linux");
+            if(file_output){
+                console.log(file_output);
+            }else if(!file_output){
+                file_output =  super.ReadTXT(`resultado.txt`, "Windows");
+                let message = file_output ? "Windows" : "Desconocido";
+                console.log(message);
+            }
+
+        } catch (error) {
+            console.log(error);
+            return { status: 500, message: error };
+
         }
     }
     /*async getInfoByIP(param){
@@ -56,9 +63,9 @@ class Nmap extends Services{
         }
     }*/
 
-   
-    
-    
+
+
+
 }
 module.exports = Nmap;
 

@@ -1,8 +1,8 @@
-# Nmap 7.94SVN scan initiated Mon Mar 24 22:20:25 2025 as: nmap -p- -A -T4 -oN resultado.txt 192.168.1.1
+# Nmap 7.94SVN scan initiated Tue Apr  1 16:39:17 2025 as: nmap -p- -A -T4 -oN resultado.txt 192.168.1.7
 WARNING: Service 192.168.1.1:16667 had already soft-matched rtsp, but now soft-matched sip; ignoring second value
 WARNING: Service 192.168.1.1:8000 had already soft-matched rtsp, but now soft-matched sip; ignoring second value
 Nmap scan report for 192.168.1.1
-Host is up (0.026s latency).
+Host is up (0.015s latency).
 Not shown: 65524 closed tcp ports (conn-refused)
 PORT      STATE    SERVICE  VERSION
 21/tcp    filtered ftp
@@ -16,13 +16,10 @@ PORT      STATE    SERVICE  VERSION
 8000/tcp  open     ssl/rtsp
 |_http-title: movistar
 |_ssl-date: TLS randomness does not represent time
-| ssl-cert: Subject: commonName=MSTC/organizationName=MSTC/stateOrProvinceName=Taiwan/countryName=TW
-| Not valid before: 2016-08-01T00:00:28
-|_Not valid after:  2026-07-30T00:00:28
 | fingerprint-strings: 
 |   GenericLines: 
 |     UNKNOWN 400 Bad Request
-|     Date: Mon, 24 Mar 2025 22:21:32 GMT
+|     Date: Tue, 01 Apr 2025 16:40:49 GMT
 |     Cache-Control: no-cache,no-store
 |     Content-Type: text/html; charset=%s
 |     X-XSS-Protection: 1
@@ -45,7 +42,7 @@ PORT      STATE    SERVICE  VERSION
 |     </html>
 |   HTTPOptions: 
 |     HTTP/1.0 501 Not Implemented
-|     Date: Mon, 24 Mar 2025 22:21:33 GMT
+|     Date: Tue, 01 Apr 2025 16:40:49 GMT
 |     Cache-Control: no-cache,no-store
 |     Content-Type: text/html; charset=%s
 |     X-XSS-Protection: 1
@@ -66,12 +63,15 @@ PORT      STATE    SERVICE  VERSION
 |     <hr>
 |     </body>
 |_    </html>
+| ssl-cert: Subject: commonName=MSTC/organizationName=MSTC/stateOrProvinceName=Taiwan/countryName=TW
+| Not valid before: 2016-08-01T00:00:28
+|_Not valid after:  2026-07-30T00:00:28
 16667/tcp open     rtsp
 |_rtsp-methods: ERROR: Script execution failed (use -d to debug)
 | fingerprint-strings: 
 |   GenericLines: 
 |     UNKNOWN 400 Bad Request
-|     Date: Mon, 24 Mar 2025 22:21:12 GMT
+|     Date: Tue, 01 Apr 2025 16:40:25 GMT
 |     Cache-Control: no-cache,no-store
 |     Content-Type: text/html; charset=%s
 |     X-XSS-Protection: 1
@@ -94,7 +94,7 @@ PORT      STATE    SERVICE  VERSION
 |     </html>
 |   GetRequest: 
 |     HTTP/1.0 200 Ok
-|     Date: Mon, 24 Mar 2025 22:21:12 GMT
+|     Date: Tue, 01 Apr 2025 16:40:25 GMT
 |     Content-Type: text/html; charset=UTF-8
 |     X-XSS-Protection: 1
 |     X-Content-Type-Options: 'nosniff'
@@ -116,72 +116,71 @@ PORT      STATE    SERVICE  VERSION
 44401/tcp filtered unknown
 2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
 ==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
-SF-Port8000-TCP:V=7.94SVN%T=SSL%I=7%D=3/24%Time=67E2212A%P=x86_64-pc-linux
-SF:-gnu%r(GenericLines,31D,"UNKNOWN\x20400\x20Bad\x20Request\r\nDate:\x20M
-SF:on,\x2024\x20Mar\x202025\x2022:21:32\x20GMT\r\nCache-Control:\x20no-cac
-SF:he,no-store\r\nContent-Type:\x20text/html;\x20charset=%s\r\nX-XSS-Prote
-SF:ction:\x201\r\nX-Content-Type-Options:\x20'nosniff'\r\nX-Frame-Options:
-SF:\x20SAMEORIGIN\r\nContent-Security-Policy:\x20frame-ancestors\x20'self'
-SF:;default-src\x20'self';\x20script-src\x20'self'\x20'unsafe-inline'\x20'
-SF:unsafe-eval';style-src\x20'self'\x20'unsafe-inline'\r\nConnection:\x20c
-SF:lose\r\n\r\n<!DOCTYPE\x20html\x20PUBLIC\x20\"-//W3C//DTD\x20HTML\x204\.
-SF:01\x20Transitional//EN\"\x20\"http://www\.w3\.org/TR/html4/loose\.dtd\"
-SF:>\n\n<html>\n\n\x20\x20<head>\n\x20\x20\x20\x20<meta\x20http-equiv=\"Co
-SF:ntent-type\"\x20content=\"text/html;charset=UTF-8\">\n\x20\x20\x20\x20<
-SF:title>400\x20Bad\x20Request</title>\n\x20\x20</head>\n\n\x20\x20<body\x
-SF:20bgcolor=\"#cc9999\"\x20text=\"#000000\"\x20link=\"#2020ff\"\x20vlink=
-SF:\"#4040cc\">\n\n\x20\x20\x20\x20<h4>400\x20Bad\x20Request</h4>\nCan't\x
-SF:20parse\x20request\.\n\t\t\t</pre>\n\t\t\n\t\t\t<hr>\n\t\t\x20\x20</bod
-SF:y>\n\t\t\n\t\t</html>\n")%r(HTTPOptions,335,"HTTP/1\.0\x20501\x20Not\x2
-SF:0Implemented\r\nDate:\x20Mon,\x2024\x20Mar\x202025\x2022:21:33\x20GMT\r
-SF:\nCache-Control:\x20no-cache,no-store\r\nContent-Type:\x20text/html;\x2
-SF:0charset=%s\r\nX-XSS-Protection:\x201\r\nX-Content-Type-Options:\x20'no
-SF:sniff'\r\nX-Frame-Options:\x20SAMEORIGIN\r\nContent-Security-Policy:\x2
-SF:0frame-ancestors\x20'self';default-src\x20'self';\x20script-src\x20'sel
-SF:f'\x20'unsafe-inline'\x20'unsafe-eval';style-src\x20'self'\x20'unsafe-i
-SF:nline'\r\nConnection:\x20close\r\n\r\n<!DOCTYPE\x20html\x20PUBLIC\x20\"
-SF:-//W3C//DTD\x20HTML\x204\.01\x20Transitional//EN\"\x20\"http://www\.w3\
-SF:.org/TR/html4/loose\.dtd\">\n\n<html>\n\n\x20\x20<head>\n\x20\x20\x20\x
-SF:20<meta\x20http-equiv=\"Content-type\"\x20content=\"text/html;charset=U
-SF:TF-8\">\n\x20\x20\x20\x20<title>501\x20Not\x20Implemented</title>\n\x20
-SF:\x20</head>\n\n\x20\x20<body\x20bgcolor=\"#cc9999\"\x20text=\"#000000\"
-SF:\x20link=\"#2020ff\"\x20vlink=\"#4040cc\">\n\n\x20\x20\x20\x20<h4>501\x
-SF:20Not\x20Implemented</h4>\nThat\x20method\x20is\x20not\x20implemented\.
-SF:\n\t\t\t</pre>\n\t\t\n\t\t\t<hr>\n\t\t\x20\x20</body>\n\t\t\n\t\t</html
-SF:>\n");
+SF-Port8000-TCP:V=7.94SVN%T=SSL%I=7%D=4/1%Time=67EC5D44%P=x86_64-pc-linux-
+SF:gnu%r(GenericLines,31D,"UNKNOWN\x20400\x20Bad\x20Request\r\nDate:\x20Tu
+SF:e,\x2001\x20Apr\x202025\x2016:40:49\x20GMT\r\nCache-Control:\x20no-cach
+SF:e,no-store\r\nContent-Type:\x20text/html;\x20charset=%s\r\nX-XSS-Protec
+SF:tion:\x201\r\nX-Content-Type-Options:\x20'nosniff'\r\nX-Frame-Options:\
+SF:x20SAMEORIGIN\r\nContent-Security-Policy:\x20frame-ancestors\x20'self';
+SF:default-src\x20'self';\x20script-src\x20'self'\x20'unsafe-inline'\x20'u
+SF:nsafe-eval';style-src\x20'self'\x20'unsafe-inline'\r\nConnection:\x20cl
+SF:ose\r\n\r\n<!DOCTYPE\x20html\x20PUBLIC\x20\"-//W3C//DTD\x20HTML\x204\.0
+SF:1\x20Transitional//EN\"\x20\"http://www\.w3\.org/TR/html4/loose\.dtd\">
+SF:\n\n<html>\n\n\x20\x20<head>\n\x20\x20\x20\x20<meta\x20http-equiv=\"Con
+SF:tent-type\"\x20content=\"text/html;charset=UTF-8\">\n\x20\x20\x20\x20<t
+SF:itle>400\x20Bad\x20Request</title>\n\x20\x20</head>\n\n\x20\x20<body\x2
+SF:0bgcolor=\"#cc9999\"\x20text=\"#000000\"\x20link=\"#2020ff\"\x20vlink=\
+SF:"#4040cc\">\n\n\x20\x20\x20\x20<h4>400\x20Bad\x20Request</h4>\nCan't\x2
+SF:0parse\x20request\.\n\t\t\t</pre>\n\t\t\n\t\t\t<hr>\n\t\t\x20\x20</body
+SF:>\n\t\t\n\t\t</html>\n")%r(HTTPOptions,335,"HTTP/1\.0\x20501\x20Not\x20
+SF:Implemented\r\nDate:\x20Tue,\x2001\x20Apr\x202025\x2016:40:49\x20GMT\r\
+SF:nCache-Control:\x20no-cache,no-store\r\nContent-Type:\x20text/html;\x20
+SF:charset=%s\r\nX-XSS-Protection:\x201\r\nX-Content-Type-Options:\x20'nos
+SF:niff'\r\nX-Frame-Options:\x20SAMEORIGIN\r\nContent-Security-Policy:\x20
+SF:frame-ancestors\x20'self';default-src\x20'self';\x20script-src\x20'self
+SF:'\x20'unsafe-inline'\x20'unsafe-eval';style-src\x20'self'\x20'unsafe-in
+SF:line'\r\nConnection:\x20close\r\n\r\n<!DOCTYPE\x20html\x20PUBLIC\x20\"-
+SF://W3C//DTD\x20HTML\x204\.01\x20Transitional//EN\"\x20\"http://www\.w3\.
+SF:org/TR/html4/loose\.dtd\">\n\n<html>\n\n\x20\x20<head>\n\x20\x20\x20\x2
+SF:0<meta\x20http-equiv=\"Content-type\"\x20content=\"text/html;charset=UT
+SF:F-8\">\n\x20\x20\x20\x20<title>501\x20Not\x20Implemented</title>\n\x20\
+SF:x20</head>\n\n\x20\x20<body\x20bgcolor=\"#cc9999\"\x20text=\"#000000\"\
+SF:x20link=\"#2020ff\"\x20vlink=\"#4040cc\">\n\n\x20\x20\x20\x20<h4>501\x2
+SF:0Not\x20Implemented</h4>\nThat\x20method\x20is\x20not\x20implemented\.\
+SF:n\t\t\t</pre>\n\t\t\n\t\t\t<hr>\n\t\t\x20\x20</body>\n\t\t\n\t\t</html>
+SF:\n");
 ==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
-SF-Port16667-TCP:V=7.94SVN%I=7%D=3/24%Time=67E22118%P=x86_64-pc-linux-gnu%
-SF:r(GenericLines,31D,"UNKNOWN\x20400\x20Bad\x20Request\r\nDate:\x20Mon,\x
-SF:2024\x20Mar\x202025\x2022:21:12\x20GMT\r\nCache-Control:\x20no-cache,no
-SF:-store\r\nContent-Type:\x20text/html;\x20charset=%s\r\nX-XSS-Protection
-SF::\x201\r\nX-Content-Type-Options:\x20'nosniff'\r\nX-Frame-Options:\x20S
-SF:AMEORIGIN\r\nContent-Security-Policy:\x20frame-ancestors\x20'self';defa
-SF:ult-src\x20'self';\x20script-src\x20'self'\x20'unsafe-inline'\x20'unsaf
-SF:e-eval';style-src\x20'self'\x20'unsafe-inline'\r\nConnection:\x20close\
-SF:r\n\r\n<!DOCTYPE\x20html\x20PUBLIC\x20\"-//W3C//DTD\x20HTML\x204\.01\x2
-SF:0Transitional//EN\"\x20\"http://www\.w3\.org/TR/html4/loose\.dtd\">\n\n
-SF:<html>\n\n\x20\x20<head>\n\x20\x20\x20\x20<meta\x20http-equiv=\"Content
-SF:-type\"\x20content=\"text/html;charset=UTF-8\">\n\x20\x20\x20\x20<title
-SF:>400\x20Bad\x20Request</title>\n\x20\x20</head>\n\n\x20\x20<body\x20bgc
-SF:olor=\"#cc9999\"\x20text=\"#000000\"\x20link=\"#2020ff\"\x20vlink=\"#40
-SF:40cc\">\n\n\x20\x20\x20\x20<h4>400\x20Bad\x20Request</h4>\nCan't\x20par
-SF:se\x20request\.\n\t\t\t</pre>\n\t\t\n\t\t\t<hr>\n\t\t\x20\x20</body>\n\
-SF:t\t\n\t\t</html>\n")%r(GetRequest,2F1,"HTTP/1\.0\x20200\x20Ok\r\nDate:\
-SF:x20Mon,\x2024\x20Mar\x202025\x2022:21:12\x20GMT\r\nContent-Type:\x20tex
-SF:t/html;\x20charset=UTF-8\r\nX-XSS-Protection:\x201\r\nX-Content-Type-Op
-SF:tions:\x20'nosniff'\r\nX-Frame-Options:\x20SAMEORIGIN\r\nContent-Securi
-SF:ty-Policy:\x20frame-ancestors\x20'self';default-src\x20'self';\x20scrip
-SF:t-src\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';style-src\x20'self'
-SF:\x20'unsafe-inline'\r\nContent-Length:\x20336\r\nLast-Modified:\x20Thu,
-SF:\x2014\x20Mar\x202024\x2003:20:02\x20GMT\r\nConnection:\x20close\r\n\r\
-SF:n<html>\r\n\t<head>\r\n\t\t<title>movistar</title>\r\n\t\t<meta\x20http
-SF:-equiv=\"Content-Type\"\x20content=\"text/html;\x20charset=UTF-8\">\r\n
-SF:\t\t<meta\x20http-equiv=\"Pragma\"\x20content=\"no-cache\">\r\n\t\t<met
-SF:a\x20http-equiv=\"Cache-Control\"\x20CONTENT=\"no-cache\">\r\n\t\t<meta
-SF:\x20http-equiv=\"refresh\"\x20content=\"0;\x20url=cgi-bin/\">\r\n\t\t<m
-SF:eta\x20name=\"robots\"\x20content=\"noindex\">\r\n\t</head>\r\n</html>"
-SF:);
+SF-Port16667-TCP:V=7.94SVN%I=7%D=4/1%Time=67EC5D2B%P=x86_64-pc-linux-gnu%r
+SF:(GenericLines,31D,"UNKNOWN\x20400\x20Bad\x20Request\r\nDate:\x20Tue,\x2
+SF:001\x20Apr\x202025\x2016:40:25\x20GMT\r\nCache-Control:\x20no-cache,no-
+SF:store\r\nContent-Type:\x20text/html;\x20charset=%s\r\nX-XSS-Protection:
+SF:\x201\r\nX-Content-Type-Options:\x20'nosniff'\r\nX-Frame-Options:\x20SA
+SF:MEORIGIN\r\nContent-Security-Policy:\x20frame-ancestors\x20'self';defau
+SF:lt-src\x20'self';\x20script-src\x20'self'\x20'unsafe-inline'\x20'unsafe
+SF:-eval';style-src\x20'self'\x20'unsafe-inline'\r\nConnection:\x20close\r
+SF:\n\r\n<!DOCTYPE\x20html\x20PUBLIC\x20\"-//W3C//DTD\x20HTML\x204\.01\x20
+SF:Transitional//EN\"\x20\"http://www\.w3\.org/TR/html4/loose\.dtd\">\n\n<
+SF:html>\n\n\x20\x20<head>\n\x20\x20\x20\x20<meta\x20http-equiv=\"Content-
+SF:type\"\x20content=\"text/html;charset=UTF-8\">\n\x20\x20\x20\x20<title>
+SF:400\x20Bad\x20Request</title>\n\x20\x20</head>\n\n\x20\x20<body\x20bgco
+SF:lor=\"#cc9999\"\x20text=\"#000000\"\x20link=\"#2020ff\"\x20vlink=\"#404
+SF:0cc\">\n\n\x20\x20\x20\x20<h4>400\x20Bad\x20Request</h4>\nCan't\x20pars
+SF:e\x20request\.\n\t\t\t</pre>\n\t\t\n\t\t\t<hr>\n\t\t\x20\x20</body>\n\t
+SF:\t\n\t\t</html>\n")%r(GetRequest,2F1,"HTTP/1\.0\x20200\x20Ok\r\nDate:\x
+SF:20Tue,\x2001\x20Apr\x202025\x2016:40:25\x20GMT\r\nContent-Type:\x20text
+SF:/html;\x20charset=UTF-8\r\nX-XSS-Protection:\x201\r\nX-Content-Type-Opt
+SF:ions:\x20'nosniff'\r\nX-Frame-Options:\x20SAMEORIGIN\r\nContent-Securit
+SF:y-Policy:\x20frame-ancestors\x20'self';default-src\x20'self';\x20script
+SF:-src\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';style-src\x20'self'\
+SF:x20'unsafe-inline'\r\nContent-Length:\x20336\r\nLast-Modified:\x20Thu,\
+SF:x2014\x20Mar\x202024\x2003:20:02\x20GMT\r\nConnection:\x20close\r\n\r\n
+SF:<html>\r\n\t<head>\r\n\t\t<title>movistar</title>\r\n\t\t<meta\x20http-
+SF:equiv=\"Content-Type\"\x20content=\"text/html;\x20charset=UTF-8\">\r\n\
+SF:t\t<meta\x20http-equiv=\"Pragma\"\x20content=\"no-cache\">\r\n\t\t<meta
+SF:\x20http-equiv=\"Cache-Control\"\x20CONTENT=\"no-cache\">\r\n\t\t<meta\
+SF:x20http-equiv=\"refresh\"\x20content=\"0;\x20url=cgi-bin/\">\r\n\t\t<me
+SF:ta\x20name=\"robots\"\x20content=\"noindex\">\r\n\t</head>\r\n</html>");
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Mon Mar 24 22:21:22 2025 -- 1 IP address (1 host up) scanned in 56.52 seconds
+# Nmap done at Tue Apr  1 16:40:27 2025 -- 1 IP address (1 host up) scanned in 70.29 seconds
