@@ -1,0 +1,11 @@
+# Nmap 7.94SVN scan initiated Mon Mar 23 13:06:24 2026 as: nmap -p- -A -T4 -oN resultado.txt 10.62.49.139
+Nmap scan report for 10.62.49.108
+Host is up (0.058s latency).
+Not shown: 65498 closed tcp ports (conn-refused), 36 filtered tcp ports (no-response)
+PORT   STATE SERVICE VERSION
+53/tcp open  domain  dnsmasq 2.51
+| dns-nsid: 
+|_  bind.version: dnsmasq-2.51
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Mar 23 13:06:40 2026 -- 1 IP address (1 host up) scanned in 18.45 seconds

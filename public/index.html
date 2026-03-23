@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS de Bootstrap 4 -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- JS de Bootstrap 4 (para componentes interactivos como modales, dropdowns, etc.) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/Css/index.css">
+
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+    <title>Node-NMAP</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="#" id="nmap" class="btn btn-primary">Escanear dispositivos</a>
+        <div id="loader" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Cargando datos...</p>
+        </div>
+    </div>
+    <!-- jQuery desde el CDN de Google -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- jQuery desde el CDN de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <div id="response" class="container">
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#loader").hide();
+            $("#nmap").click(function () {
+                $("#loader").show();
+                $.get("http://localhost:3000/scan", function (data) {
+                    $("#loader").hide();
+                    console.log("Respuesta del servidor:", data);
+                    if (data.Message ==='Nmap no instalado') {
+                        if (confirm("Un compomente (NMAP) debe ser instalado para poder realizar el escaneo , presione en aceptar para la instalacion")) {
+                            alert("instalando nmap , esto puede tomar unos minutos");
+                            $("#loader").show();
+                            $.get("http://localhost:3000/nmap_install",function(data){
+                                alert("nmap instalado correctamente");
+                                $("#loader").hide();
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+                                $("#loader").hide();
+                                console.error("Error en la petición:", textStatus, errorThrown, jqXHR.responseText);
+                                alert("Error al realizar la petición. Revisa la consola para más detalles.");
+                            });
+                        } else {
+                            let html = `<div class="row">
+                            <div class="col">
+                                <p>${data.Message} , Ejecute el siguiente comando en su consola cmd: <b>wsl sudo apt install nmap -y</b> , ingrese la contraseña de usuario y una vez instalado ejecute nuevamente el escaner</p>
+                            </div>
+                        </div>`;
+                            $("#response").html(html);
+                        }
+                    } else {
+                        alert('Si realizo el escaneo')
+                        const host = data.Message.nmaprun.host;
+                        let html = `
+                        <div class="row">
+                            <div class="col">
+                                <p>Dispositivos Conectados: ${Array.isArray(host) ? host.length : 1}</p>
+                            </div>
+                        </div>
+                        <div class="row">`;
+
+                        let ip_devices = [];
+                        let procesador = "";
+                        let ram = "";
+                        let disk = "";
+                        if (Array.isArray(host)) {
+                            host.forEach(element => {
+                                procesador = (element.address.$.Procesor === undefined) ? "" : element.address.$.Procesor;
+                                ram = (element.address.$.Ram === undefined) ? [] : Array.isArray(element.address.$.Ram) ? element.address.$.Ram : [element.address.$.Ram];
+                                disk = (element.address.$.Disk === undefined) ? [] : Array.isArray(element.address.$.Disk) ? element.address.$.Disk : [element.address.$.Disk];
+                                ip_devices.push(element.address.$.addr);
+                                const ram_capacity_total = ram.reduce((acumulator, Ram) => { return acumulator + Ram.Capacity }, 0) / (1024 ** 3)
+                                const disk_capacity_total = disk.reduce((acumulador, Disk) => { return acumulador + Disk.Size || 0 }, 0) / (1024 ** 3)
+                                const disk_free_space = disk.reduce((acumulador, Disk) => { return acumulador + Disk.FreeSpace || 0 }, 0) / (1024 ** 3)
+
+                                html += `
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header">${element.address.$.addr} - ${element.address.$.addrtype}</div>
+                                        <div class="card-body">
+                                            <h4 class="card-title">Sistema Operativo ${element.address.$.OS}</h4>
+                                            <p class="card-text">Procesador: ${procesador.Name}</p>
+                                            <p class="card-text">Capacidad Almacenamiento: ${disk_capacity_total.toFixed(2)} GB</p>
+                                            <p class="card-text">Espacio Libre: ${disk_free_space.toFixed(2)} GB</p>
+                                            <p class="card-text">Memoria Ram: ${ram_capacity_total.toFixed(2)} GB</p>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            });
+                        } else {
+                            html += `
+                            <div class="col-md-4 col-sm-6">
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-header">${host.address.$.addr} - ${host.address.$.addrtype}</div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">Título de la tarjeta</h4>
+                                         <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Procesador
+                                            </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Memoria Ram
+                                            </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Disco Duro
+                                            </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        }
+
+                        html += `</div>`;
+                        $("#response").html(html);
+                    }
+
+
+
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $("#loader").hide();
+                    console.error("Error en la petición:", textStatus, errorThrown, jqXHR.responseText);
+                    alert("Error al realizar la petición. Revisa la consola para más detalles.");
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
