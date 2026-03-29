@@ -24,7 +24,7 @@ class Services {
 
     async executeCommand(param) {
         try {
-            console.log(`ejecutando comando: ${param}`);
+            //console.log(`ejecutando comando: ${param}`);
             return new Promise((resolve, reject) => {
                 exec(param, (error, stdout, stderr) => {
                     if (error) {
@@ -35,7 +35,7 @@ class Services {
                         console.log(`Error: ${stderr}`);
                         reject(new Error(`Error en stderr: ${stderr}`));
                     }
-                    console.log(`En ejecucion`);
+                    //console.log(`En ejecucion`);
                     resolve(stdout);
                 });
             });
@@ -45,13 +45,13 @@ class Services {
     }
 
     async XmltoJson(param) {
-        console.log("desde XmltoJson");
+        //console.log("desde XmltoJson");
         try {
             const data = await fs.promises.readFile(param, 'utf8');
-            console.log(data);
+            //console.log(data);
             return await this.parser.parseStringPromise(data);
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             return { status: 500, message: error.message || error };
         }
     }
@@ -64,19 +64,19 @@ class Services {
     ReadTXT(param, regex) {
         try {
             if (!fs.existsSync(param)) {
-                console.error("Archivo no encontrado:", param);
+                //console.error("Archivo no encontrado:", param);
                 return { Code: 404, message: "Archivo no encontrado" };
             }
 
             const data = fs.readFileSync(param, 'utf-8'); 
-            console.log("Archivo leído correctamente.");
+            //console.log("Archivo leído correctamente.");
 
             const match = new RegExp(`\\b${regex}\\b`, 'i');
             return match.test(data);
 
             
         } catch (error) {
-            console.error("Error leyendo archivo:", error);
+            //console.error("Error leyendo archivo:", error);
             return { status: 500, message: error.message || error };
         }
     }
@@ -93,7 +93,7 @@ class Services {
                 return { status: 400 };
             }
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             return { status: 500, message: error.message || error };
         }
     }
@@ -102,20 +102,20 @@ class Services {
         const date = new Date;
         try {
             fs.appendFile(`app_log.log`, `[${date}]: ${param} + \n`);
-            console.log(`[${date}]: ${param}`);
+            //console.log(`[${date}]: ${param}`);
         } catch (error) {
-            console.log(`[${date}]: ${error}`);
+            //console.log(`[${date}]: ${error}`);
             return { status: 500, message: error };
 
         }
     }
      async getIpRouteExclude(){
         try{
-            console.log('getIpRouteExclude');
+            //console.log('getIpRouteExclude');
             const response = await super.executeCommand('wsl ip route | grep default');
             return {'Code':200,message:"Comando ejecutado",data:`${response}`}
         }catch(error){
-            console.log(error);
+            //console.log(error);
             return {status:500,message:error}
         }
     }

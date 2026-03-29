@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.94SVN scan initiated Wed Mar 25 10:09:11 2026 as: nmap -sP -oX output.xml 10.62.49.108/24 -->
-<nmaprun scanner="nmap" args="nmap -sP -oX output.xml 10.62.49.108/24" start="1774451351" startstr="Wed Mar 25 10:09:11 2026" version="7.94SVN" xmloutputversion="1.05">
+<!-- Nmap 7.94SVN scan initiated Sun Mar 29 18:07:47 2026 as: nmap -sP -oX output.xml 192.168.0.0/24 -->
+<nmaprun scanner="nmap" args="nmap -sP -oX output.xml 192.168.0.0/24" start="1774825667" startstr="Sun Mar 29 18:07:47 2026" version="7.94SVN" xmloutputversion="1.05">
 <verbose level="0"/>
 <debugging level="0"/>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
-<address addr="10.62.49.105" addrtype="ipv4"/>
+<address addr="192.168.0.1" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<times srtt="150" rttvar="5000" to="100000"/>
+<times srtt="10379" rttvar="10379" to="100000"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
-<address addr="10.62.49.108" addrtype="ipv4"/>
+<address addr="192.168.0.2" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<times srtt="3027" rttvar="3943" to="100000"/>
+<times srtt="13071" rttvar="13071" to="100000"/>
 </host>
-<runstats><finished time="1774451370" timestr="Wed Mar 25 10:09:30 2026" summary="Nmap done at Wed Mar 25 10:09:30 2026; 256 IP addresses (2 hosts up) scanned in 19.54 seconds" elapsed="19.54" exit="success"/><hosts up="2" down="254" total="256"/>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="192.168.0.4" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="26971" rttvar="26971" to="134855"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="192.168.0.5" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="26953" rttvar="26953" to="134765"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="192.168.0.6" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="7816" rttvar="7816" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="192.168.0.253" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="6594" rttvar="6594" to="100000"/>
+</host>
+<runstats><finished time="1774825670" timestr="Sun Mar 29 18:07:50 2026" summary="Nmap done at Sun Mar 29 18:07:50 2026; 256 IP addresses (6 hosts up) scanned in 3.02 seconds" elapsed="3.02" exit="success"/><hosts up="6" down="250" total="256"/>
 </runstats>
 </nmaprun>

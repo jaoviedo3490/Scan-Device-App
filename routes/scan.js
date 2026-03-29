@@ -7,11 +7,11 @@ const Services = require('../Services/GenericServices/Services.cjs');
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
   const services = new Services();
-  let routerIp = await services.getIpRouteExclude();
-  console.log(routerIp);
+  await services.getIpRouteExclude();
+  //console.log(routerIp);
   let ServiceScanResponse = scanServices.getInstance();
   let responseNMAPScan = await ServiceScanResponse.getScannNetWork();
-  console.log(responseNMAPScan);
+  //console.log(responseNMAPScan);
   res.send(responseNMAPScan);
 });
 

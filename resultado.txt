@@ -1,11 +1,108 @@
-# Nmap 7.94SVN scan initiated Wed Mar 25 10:09:34 2026 as: nmap -p- -A -T4 -oN resultado.txt 10.62.49.108
-Nmap scan report for 10.62.49.108
-Host is up (0.0021s latency).
-Not shown: 65498 closed tcp ports (conn-refused), 36 filtered tcp ports (no-response)
-PORT   STATE SERVICE VERSION
-53/tcp open  domain  dnsmasq 2.51
-| dns-nsid: 
-|_  bind.version: dnsmasq-2.51
+# Nmap 7.94SVN scan initiated Sun Mar 29 18:08:01 2026 as: nmap -p- -A -T4 -oN resultado.txt 192.168.0.25Nmap scan report for 192.168.0.5
+Host is up (0.0092s latency).
+Not shown: 65522 closed tcp ports (conn-refused)
+PORT      STATE    SERVICE         VERSION
+5060/tcp  filtered sip
+6466/tcp  open     ssl/unknown
+6467/tcp  open     ssl/unknown
+8008/tcp  open     http?
+|_http-title: Site doesn't have a title (text/html).
+8009/tcp  open     ssl/ajp13?
+| ssl-cert: Subject: commonName=719ff5d0-c2dd-7d50-87b8-81530e42020e
+| Not valid before: 2026-03-29T01:55:12
+|_Not valid after:  2026-03-31T01:55:12
+|_ssl-date: TLS randomness does not represent time
+|_ajp-methods: Failed to get a valid response for the OPTION request
+8443/tcp  open     ssl/https-alt?
+| ssl-cert: Subject: commonName=-1046510893374478445/organizationName=Google Inc/stateOrProvinceName=Washington/countryName=US
+| Not valid before: 2022-06-29T17:29:53
+|_Not valid after:  2042-06-29T17:29:53
+|_http-title: Site doesn't have a title (text/html).
+9000/tcp  open     ssl/cslistener?
+9080/tcp  open     glrpc?
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 200 OK
+|     Date: Sun, 29 Mar 2026 18:09:21 -05
+|     Server: NRDP/2020.1.3.1
+|     Connection: close
+|     Cache-Control: no-cache
+|     Content-Length: 9
+|     status=ok
+|   GetRequest: 
+|     HTTP/1.0 200 OK
+|     Date: Sun, 29 Mar 2026 18:08:36 -05
+|     Server: NRDP/2020.1.3.1
+|     Connection: close
+|     Cache-Control: no-cache
+|     Content-Length: 9
+|_    status=ok
+38473/tcp open     unknown
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, NULL, RPCCheck, SSLSessionReq, TerminalServerCookie: 
+|     HTTP/1.1 408 Request Timeout
+|     Server: eSDK
+|     Content-Security-Policy: frame-ancestors 'none';
+|     Content-Length: 0
+|     Connection: close
+|   GenericLines, HTTPOptions, RTSPRequest: 
+|     HTTP/1.1 400 Bad Request
+|     Server: eSDK
+|     Content-Security-Policy: frame-ancestors 'none';
+|     Content-Length: 0
+|     Connection: close
+|   GetRequest: 
+|     HTTP/1.1 404 Not found
+|     Server: eSDK
+|     Content-Security-Policy: frame-ancestors 'none';
+|     Content-Length: 0
+|_    Connection: close
+41491/tcp open     tcpwrapped
+45509/tcp open     tcpwrapped
+56789/tcp open     tcpwrapped
+56790/tcp open     tcpwrapped
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port9080-TCP:V=7.94SVN%I=7%D=3/29%Time=69C9B0F4%P=x86_64-pc-linux-gnu%r
+SF:(GetRequest,99,"HTTP/1\.0\x20200\x20OK\r\nDate:\x20Sun,\x2029\x20Mar\x2
+SF:02026\x2018:08:36\x20-05\r\nServer:\x20NRDP/2020\.1\.3\.1\r\nConnection
+SF::\x20close\r\nCache-Control:\x20no-cache\r\nContent-Length:\x209\r\n\r\
+SF:nstatus=ok")%r(FourOhFourRequest,99,"HTTP/1\.0\x20200\x20OK\r\nDate:\x2
+SF:0Sun,\x2029\x20Mar\x202026\x2018:09:21\x20-05\r\nServer:\x20NRDP/2020\.
+SF:1\.3\.1\r\nConnection:\x20close\r\nCache-Control:\x20no-cache\r\nConten
+SF:t-Length:\x209\r\n\r\nstatus=ok");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port38473-TCP:V=7.94SVN%I=7%D=3/29%Time=69C9B0EE%P=x86_64-pc-linux-gnu%
+SF:r(NULL,86,"HTTP/1\.1\x20408\x20Request\x20Timeout\r\nServer:\x20eSDK\r\
+SF:nContent-Security-Policy:\x20frame-ancestors\x20'none';\r\nContent-Leng
+SF:th:\x200\r\nConnection:\x20close\r\n\r\n")%r(GenericLines,82,"HTTP/1\.1
+SF:\x20400\x20Bad\x20Request\r\nServer:\x20eSDK\r\nContent-Security-Policy
+SF::\x20frame-ancestors\x20'none';\r\nContent-Length:\x200\r\nConnection:\
+SF:x20close\r\n\r\n")%r(GetRequest,80,"HTTP/1\.1\x20404\x20Not\x20found\r\
+SF:nServer:\x20eSDK\r\nContent-Security-Policy:\x20frame-ancestors\x20'non
+SF:e';\r\nContent-Length:\x200\r\nConnection:\x20close\r\n\r\n")%r(HTTPOpt
+SF:ions,82,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nServer:\x20eSDK\r\nConte
+SF:nt-Security-Policy:\x20frame-ancestors\x20'none';\r\nContent-Length:\x2
+SF:00\r\nConnection:\x20close\r\n\r\n")%r(RTSPRequest,82,"HTTP/1\.1\x20400
+SF:\x20Bad\x20Request\r\nServer:\x20eSDK\r\nContent-Security-Policy:\x20fr
+SF:ame-ancestors\x20'none';\r\nContent-Length:\x200\r\nConnection:\x20clos
+SF:e\r\n\r\n")%r(RPCCheck,86,"HTTP/1\.1\x20408\x20Request\x20Timeout\r\nSe
+SF:rver:\x20eSDK\r\nContent-Security-Policy:\x20frame-ancestors\x20'none';
+SF:\r\nContent-Length:\x200\r\nConnection:\x20close\r\n\r\n")%r(DNSVersion
+SF:BindReqTCP,86,"HTTP/1\.1\x20408\x20Request\x20Timeout\r\nServer:\x20eSD
+SF:K\r\nContent-Security-Policy:\x20frame-ancestors\x20'none';\r\nContent-
+SF:Length:\x200\r\nConnection:\x20close\r\n\r\n")%r(DNSStatusRequestTCP,86
+SF:,"HTTP/1\.1\x20408\x20Request\x20Timeout\r\nServer:\x20eSDK\r\nContent-
+SF:Security-Policy:\x20frame-ancestors\x20'none';\r\nContent-Length:\x200\
+SF:r\nConnection:\x20close\r\n\r\n")%r(Help,86,"HTTP/1\.1\x20408\x20Reques
+SF:t\x20Timeout\r\nServer:\x20eSDK\r\nContent-Security-Policy:\x20frame-an
+SF:cestors\x20'none';\r\nContent-Length:\x200\r\nConnection:\x20close\r\n\
+SF:r\n")%r(SSLSessionReq,86,"HTTP/1\.1\x20408\x20Request\x20Timeout\r\nSer
+SF:ver:\x20eSDK\r\nContent-Security-Policy:\x20frame-ancestors\x20'none';\
+SF:r\nContent-Length:\x200\r\nConnection:\x20close\r\n\r\n")%r(TerminalSer
+SF:verCookie,86,"HTTP/1\.1\x20408\x20Request\x20Timeout\r\nServer:\x20eSDK
+SF:\r\nContent-Security-Policy:\x20frame-ancestors\x20'none';\r\nContent-L
+SF:ength:\x200\r\nConnection:\x20close\r\n\r\n");
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Wed Mar 25 10:09:52 2026 -- 1 IP address (1 host up) scanned in 17.77 seconds
+# Nmap done at Sun Mar 29 18:11:15 2026 -- 1 IP address (1 host up) scanned in 198.14 seconds

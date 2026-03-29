@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "ioredis": "^5.10.1",
     "morgan": "~1.9.1",
     "node-cron": "^4.2.1",
     "node-nmap": "^4.0.0"

@@ -8,7 +8,6 @@ class Nmap extends Services {
     static date = new Date();
     constructor() {
         super();
-        console.log("nmap");
     }
     async getNMAPVersion() {
         let nmap;
@@ -36,7 +35,7 @@ class Nmap extends Services {
     }
 
     async getDeviceConnected(param) {
-        console.log("getDeviceConnected");
+       // console.log("getDeviceConnected");
 
         try {
             await super.executeCommand(`wsl nmap -sP ${param} -oX output.xml > nul 2>&1`);
@@ -55,19 +54,19 @@ class Nmap extends Services {
             super.executeCommand(`wsl nmap -p- -A -T4 -oN resultado.txt ${param} > nul 2>&1`);
 
             file_output = super.ReadTXT(`resultado.txt`, "Linux");
-            console.log(file_output);
+            //console.log(file_output);
             if (file_output) {
                 message = "Linux";
-                console.log(message);
+                //console.log(message);
                 return message;
             } else if (!file_output) {
                 file_output = super.ReadTXT(`resultado.txt`, "Windows");
                 message = (file_output) ? "Windows" : "Desconocido";
-                console.log(message);
+                //console.log(message);
                 return message;
             }
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             return { status: 500, message: error };
         }
     }

@@ -1,9 +1,11 @@
 const nmap = require('./NMAP.cjs');
 const axios = require('axios');
 const Services = require('../GenericServices/Services.cjs');
+const redis = require('../Redis/Redis.cjs')
 
 class scanServices {
     static #instance = null;
+
 
     constructor() {
         console.log('scanService initialized');
@@ -18,7 +20,7 @@ class scanServices {
 
     async getScannNetWork() {
         const range = "192.168.0.0/24";
-        const range_local = "10.62.49.108/24"
+        const range_local = "10.132.7.202/24"
         const nmap_object = nmap.getInstance();
         const n = await nmap_object.getNMAPVersion();
         let regex = new RegExp("command\\s+not\\s+found|not\\s+found\\s+", "i");
@@ -26,8 +28,8 @@ class scanServices {
         if (regex.test(n)) {
             result = { Message: "Nmap no instalado" };
         } else {
-            //result = await nmap_object.getDeviceConnected(range);
-            result = await nmap_object.getDeviceConnected(range_local);
+            result = await nmap_object.getDeviceConnected(range);
+            //result = await nmap_object.getDeviceConnected(range_local);
             let systeminfo = "";
             for (const [key, value] of Object.entries(result.nmaprun.host)) {
                 const ip = value.address.$.addr;
@@ -62,18 +64,23 @@ class scanServices {
                         value.address.$.SystemOperating = response_remote_so.data;
                         value.address.$.NameDevice = response_remote_name.data;
                         value.address.$.statusAgent = "Online";
+                    } else {
+                        value.address.$.statusAgent = "Pending";
+                        value.address.$.AgentMessage = "Ocurrio un error al revisar el estado del Agente remoto";
                     }
-                value.address.$.statusAgent = "Pending";
-                value.address.$.AgentMessage = "Ocurrio un error al revisar el estado del Agente remoto";
+
 
                 } catch (err) {
-                   
-                    value.address.$.error = (err.message===`connect ECONNREFUSED ${ip}:8080`) ? "Agente remoto inactivo o puerto ocupado" : err.message;
+
+                    value.address.$.error = (err.message === `connect ECONNREFUSED ${ip}:8080`) ? "Agente remoto inactivo o puerto ocupado" : err.message;
                     value.address.$.statusAgent = "Offline";
                 }
                 value.address.$.OS = systeminfo;
             }
         }
+        const redisService = redis.getInstance();
+        let resultRedis = await redisService.createVarTemp("Inventory", JSON.stringify(result),1000);
+        result['Temporal_Inventory'] = resultRedis;
         return result;
     }
 }
