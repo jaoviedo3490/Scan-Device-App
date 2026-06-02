@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
-<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.94SVN scan initiated Sun Mar 29 18:07:47 2026 as: nmap -sP -oX output.xml 192.168.0.0/24 -->
-<nmaprun scanner="nmap" args="nmap -sP -oX output.xml 192.168.0.0/24" start="1774825667" startstr="Sun Mar 29 18:07:47 2026" version="7.94SVN" xmloutputversion="1.05">
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Mon Jun  1 20:14:00 2026 as: /usr/lib/nmap/nmap -sP -oX output.xml 192.168.0.0/24 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sP -oX output.xml 192.168.0.0/24" start="1780362840" startstr="Mon Jun  1 20:14:00 2026" version="7.98" xmloutputversion="1.05">
 <verbose level="0"/>
 <debugging level="0"/>
-<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<host><status state="up" reason="echo-reply" reason_ttl="62"/>
 <address addr="192.168.0.1" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<times srtt="10379" rttvar="10379" to="100000"/>
+<times srtt="17195" rttvar="17195" to="100000"/>
 </host>
-<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<host><status state="up" reason="echo-reply" reason_ttl="63"/>
 <address addr="192.168.0.2" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<times srtt="13071" rttvar="13071" to="100000"/>
+<times srtt="2471" rttvar="5000" to="100000"/>
 </host>
-<host><status state="up" reason="conn-refused" reason_ttl="0"/>
-<address addr="192.168.0.4" addrtype="ipv4"/>
-<hostnames>
-</hostnames>
-<times srtt="26971" rttvar="26971" to="134855"/>
-</host>
-<host><status state="up" reason="conn-refused" reason_ttl="0"/>
-<address addr="192.168.0.5" addrtype="ipv4"/>
-<hostnames>
-</hostnames>
-<times srtt="26953" rttvar="26953" to="134765"/>
-</host>
-<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<host><status state="up" reason="echo-reply" reason_ttl="62"/>
 <address addr="192.168.0.6" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<times srtt="7816" rttvar="7816" to="100000"/>
+<times srtt="42731" rttvar="38174" to="195427"/>
 </host>
-<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<host><status state="up" reason="echo-reply" reason_ttl="62"/>
+<address addr="192.168.0.7" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="17573" rttvar="17573" to="100000"/>
+</host>
+<host><status state="up" reason="echo-reply" reason_ttl="62"/>
 <address addr="192.168.0.253" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<times srtt="6594" rttvar="6594" to="100000"/>
+<times srtt="334748" rttvar="406926" to="1962452"/>
 </host>
-<runstats><finished time="1774825670" timestr="Sun Mar 29 18:07:50 2026" summary="Nmap done at Sun Mar 29 18:07:50 2026; 256 IP addresses (6 hosts up) scanned in 3.02 seconds" elapsed="3.02" exit="success"/><hosts up="6" down="250" total="256"/>
+<runstats><finished time="1780362852" timestr="Mon Jun  1 20:14:12 2026" summary="Nmap done at Mon Jun  1 20:14:12 2026; 256 IP addresses (5 hosts up) scanned in 12.61 seconds" elapsed="12.61" exit="success"/><hosts up="5" down="251" total="256"/>
 </runstats>
 </nmaprun>

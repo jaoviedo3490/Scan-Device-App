@@ -1,50 +1,46 @@
 const cron = require('node-cron');
+const Logger = require('../Services/logs/pino.js');
 
 class Jobs {
     static #instance = null;
+    static loggerInstance = null;
+    constructor() {
+        Jobs.loggerInstance = Logger.getInstance();
+    }
+
+
     static getInstance() {
         try {
             if (!this.#instance) {
                 this.#instance = new Jobs();
+
             }
             return this.#instance;
         } catch (error) {
             return { 'Code': 500, "Message": error }
+            Jobs.loggerInstance.error(`Ocurrio un error al instanciar la clase Jobs. ${error.message}`);
         }
     }
     createJob(jobExec, taskProgram) {
         try {
-            return new Promise((resolve, reject) => {
-                cron.schedule(taskProgram, () => {
-                    try {
-                        jobExec();
-                        console.log("Ejecutando JOB");
-                        resolve({"Code":200,"Message":`Ejecutando JOB`});
-                    } catch (error) {
-                        reject({"Code":500,"Message":`Ocurrio un error en el JOB: ${error.message || error}`});
-                    }
-                })
-            })
+            const task = cron.schedule(taskProgram, async () => {
+                try {
+                    const result = jobExec();
+                    Jobs.loggerInstance.info(`Job Automatico Ejecutando ${JSON.stringify(result)}`);
+                    return { "Code": 200, "Message": `Ejecutando JOB`, reference: result };
 
+                } catch (error) {
+                    Jobs.loggerInstance.error(error, `Ocurrio un error al crear o ejecutar el Job.`);
+                    return { "Code": 500, "Message": `Ocurrio un error en el JOB: ${error.message || error}` };
+                }
+            });
+
+            return task
         } catch (error) {
-            console.log(error.message);
+            Jobs.loggerInstance.error(`Ocurrio un error al crear o ejecutar el Job. ${error.message}`);
             return { 'Code': 500, "Message": `Ocurrio un error al ejecutar el JOB: ${error.message}` }
         }
+
     }
-    /*createJob(taskProgram) {
-        try {
-            cron.schedule(taskProgram, () => {
-                try {
-                    console.log('a ver? jsjsjsj');
-                } catch (error) {
-                    console.error('ocurrio un error, no se que error, pero ps ni modo',error.message)
-                }
-            })
-
-        } catch (error) {
-            return { 'Code': 500, "Message": error.message || error }
-        }
-    }*/
-
 }
 module.exports = Jobs;
